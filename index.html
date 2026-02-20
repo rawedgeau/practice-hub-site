@@ -4,25 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Clinician ADHD Play — RAW Edge Performance</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Urbanist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --navy: #041E49;
-      --navy-90: rgba(4, 30, 73, 0.9);
-      --navy-light: #0a2d5c;
+      --navy-hover: #0a2d5c;
+      --navy-90: rgba(255, 255, 255, 0.95);
       --light-navy: #E8EEF4;
-      --light-navy-dim: rgba(232, 238, 244, 0.08);
       --white: #FFFFFF;
-      --white-muted: rgba(255, 255, 255, 0.7);
-      --white-dim: rgba(255, 255, 255, 0.12);
+      --text: #041E49;
+      --text-muted: #6B7280;
+      --border: #D1D5DB;
+      --border-light: #E5E7EB;
+      --bg: #FFFFFF;
+      --bg-alt: #F5F7FA;
       --rust: #B91C1C;
       --rust-bright: #DC2626;
-      --rust-dim: rgba(185, 28, 28, 0.15);
-      --green: #34d399;
-      --surface: #071e3d;
-      --surface-2: #0c2a52;
+      --rust-dim: rgba(185, 28, 28, 0.08);
+      --green: #059669;
+      --green-bg: rgba(5, 150, 105, 0.08);
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 8px rgba(0,0,0,0.1);
+      --shadow-lg: 0 12px 24px rgba(0,0,0,0.12);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,10 +36,10 @@
     }
 
     body {
-      font-family: 'Urbanist', sans-serif;
-      background: var(--navy);
-      color: var(--white);
-      line-height: 1.6;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -48,22 +50,22 @@
       left: 0;
       right: 0;
       z-index: 100;
-      padding: 1rem 2rem;
+      height: 80px;
+      padding: 0 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      backdrop-filter: blur(20px);
-      background: var(--navy-90);
-      border-bottom: 1px solid var(--white-dim);
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
     }
 
     nav .logo {
-      font-family: 'Urbanist', sans-serif;
       font-weight: 700;
       font-size: 0.9rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--white);
+      color: var(--navy);
     }
 
     nav .nav-links {
@@ -73,7 +75,7 @@
     }
 
     nav .nav-links a {
-      color: var(--white-muted);
+      color: var(--text-muted);
       text-decoration: none;
       font-size: 0.8rem;
       font-weight: 500;
@@ -83,7 +85,7 @@
 
     nav .nav-links a:hover,
     nav .nav-links a.active {
-      color: var(--white);
+      color: var(--navy);
     }
 
     /* ── Sections ── */
@@ -98,48 +100,48 @@
     }
 
     .container {
-      max-width: 1100px;
+      max-width: 1240px;
       width: 100%;
       margin: 0 auto;
     }
 
     /* ── Typography ── */
     h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      line-height: 1.15;
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      line-height: 1.2;
       margin-bottom: 1.5rem;
-      font-weight: 400;
+      font-weight: 600;
+      color: var(--navy);
     }
 
     h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      line-height: 1.2;
+      font-size: clamp(1.875rem, 3.5vw, 2.5rem);
+      line-height: 1.3;
       margin-bottom: 1rem;
-      font-weight: 400;
+      font-weight: 600;
+      color: var(--navy);
     }
 
     h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      font-size: clamp(1.2rem, 2vw, 1.5rem);
       line-height: 1.3;
       margin-bottom: 0.75rem;
-      font-weight: 400;
+      font-weight: 600;
+      color: var(--navy);
     }
 
     .lead {
       font-size: clamp(1rem, 1.8vw, 1.25rem);
-      color: var(--white-muted);
+      color: var(--text-muted);
       max-width: 700px;
       line-height: 1.7;
       margin-bottom: 2rem;
     }
 
     .label {
-      font-family: 'JetBrains Mono', monospace;
       font-size: 0.75rem;
-      letter-spacing: 0.2em;
+      font-weight: 600;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--rust-bright);
       margin-bottom: 1rem;
@@ -148,16 +150,17 @@
 
     /* ── Cards ── */
     .card {
-      background: var(--surface);
-      border: 1px solid var(--white-dim);
+      background: var(--white);
+      border: 1px solid var(--border);
       border-radius: 12px;
       padding: 2rem;
-      transition: transform 0.3s, border-color 0.3s;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .card:hover {
       transform: translateY(-4px);
-      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: var(--shadow-lg);
     }
 
     .card h3 {
@@ -165,18 +168,18 @@
     }
 
     .card p {
-      color: var(--white-muted);
+      color: var(--text-muted);
       font-size: 0.95rem;
       line-height: 1.6;
     }
 
     .card-rust {
-      background: linear-gradient(135deg, var(--rust-dim), var(--surface));
-      border-color: rgba(185, 28, 28, 0.3);
+      background: var(--white);
+      border-left: 4px solid var(--rust);
     }
 
     .card-rust:hover {
-      border-color: rgba(185, 28, 28, 0.5);
+      box-shadow: var(--shadow-lg);
     }
 
     /* ── Grids ── */
@@ -203,9 +206,9 @@
 
     /* ── Metric ── */
     .metric {
-      font-family: 'DM Serif Display', serif;
       font-size: 2.5rem;
-      color: var(--rust-bright);
+      font-weight: 700;
+      color: var(--navy);
       line-height: 1;
       margin-bottom: 0.5rem;
     }
@@ -216,20 +219,20 @@
 
     /* ── Phase callout ── */
     .phase-callout {
-      background: var(--surface-2);
-      border-left: 4px solid var(--rust);
+      background: var(--light-navy);
+      border-left: 4px solid var(--navy);
       padding: 1.5rem 2rem;
       border-radius: 0 8px 8px 0;
       margin-top: 2rem;
     }
 
     .phase-callout p {
-      color: var(--white-muted);
+      color: var(--text-muted);
       font-size: 0.95rem;
     }
 
     .phase-callout strong {
-      color: var(--white);
+      color: var(--navy);
     }
 
     /* ── Table ── */
@@ -237,33 +240,40 @@
       width: 100%;
       border-collapse: collapse;
       margin-top: 2rem;
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
     }
 
     .pricing-table th {
-      font-family: 'JetBrains Mono', monospace;
       font-size: 0.7rem;
+      font-weight: 600;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--white-muted);
+      color: var(--text-muted);
       text-align: left;
       padding: 1rem 1.5rem;
-      border-bottom: 1px solid var(--white-dim);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-alt);
     }
 
     .pricing-table td {
       padding: 1.25rem 1.5rem;
-      border-bottom: 1px solid var(--white-dim);
+      border-bottom: 1px solid var(--border-light);
       font-size: 0.95rem;
+      color: var(--text);
     }
 
     .pricing-table tr:hover td {
-      background: var(--surface);
+      background: var(--bg-alt);
     }
 
     .price-tag {
-      font-family: 'DM Serif Display', serif;
       font-size: 1.3rem;
-      color: var(--rust-bright);
+      font-weight: 700;
+      color: var(--navy);
     }
 
     /* ── Timeline ── */
@@ -280,7 +290,7 @@
       top: 0;
       bottom: 0;
       width: 2px;
-      background: var(--white-dim);
+      background: var(--border);
     }
 
     .timeline-item {
@@ -297,19 +307,19 @@
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      background: var(--rust);
-      border: 2px solid var(--navy);
+      background: var(--navy);
+      border: 2px solid var(--white);
+      box-shadow: var(--shadow-sm);
     }
 
     .timeline-item h3 {
-      font-family: 'Urbanist', sans-serif;
       font-weight: 600;
       font-size: 1rem;
       margin-bottom: 0.25rem;
     }
 
     .timeline-item p {
-      color: var(--white-muted);
+      color: var(--text-muted);
       font-size: 0.9rem;
     }
 
@@ -324,12 +334,13 @@
       counter-increment: step;
       position: relative;
       padding: 1.25rem 1.5rem 1.25rem 4rem;
-      background: var(--surface);
-      border: 1px solid var(--white-dim);
+      background: var(--white);
+      border: 1px solid var(--border);
       border-radius: 8px;
       margin-bottom: 1rem;
       font-size: 0.95rem;
-      color: var(--white-muted);
+      color: var(--text-muted);
+      box-shadow: var(--shadow-sm);
     }
 
     .steps li::before {
@@ -338,13 +349,13 @@
       left: 1.25rem;
       top: 50%;
       transform: translateY(-50%);
-      font-family: 'DM Serif Display', serif;
       font-size: 1.4rem;
-      color: var(--rust-bright);
+      font-weight: 700;
+      color: var(--navy);
     }
 
     .steps li strong {
-      color: var(--white);
+      color: var(--navy);
     }
 
     /* ── Versus table ── */
@@ -353,9 +364,10 @@
       grid-template-columns: 1fr 1fr;
       gap: 0;
       margin-top: 2rem;
-      border: 1px solid var(--white-dim);
+      border: 1px solid var(--border);
       border-radius: 12px;
       overflow: hidden;
+      box-shadow: var(--shadow-sm);
     }
 
     .vs-col {
@@ -363,24 +375,24 @@
     }
 
     .vs-col:first-child {
-      background: var(--surface);
-      border-right: 1px solid var(--white-dim);
+      background: var(--bg-alt);
+      border-right: 1px solid var(--border);
     }
 
     .vs-col:last-child {
-      background: var(--surface-2);
+      background: var(--white);
     }
 
     .vs-col h3 {
-      font-family: 'JetBrains Mono', monospace;
       font-size: 0.7rem;
+      font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       margin-bottom: 1.5rem;
     }
 
-    .vs-col:first-child h3 { color: var(--white-muted); }
-    .vs-col:last-child h3 { color: var(--rust-bright); }
+    .vs-col:first-child h3 { color: var(--text-muted); }
+    .vs-col:last-child h3 { color: var(--navy); }
 
     .vs-col ul {
       list-style: none;
@@ -389,8 +401,8 @@
     .vs-col ul li {
       padding: 0.6rem 0;
       font-size: 0.9rem;
-      color: var(--white-muted);
-      border-bottom: 1px solid var(--white-dim);
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-light);
     }
 
     .vs-col ul li:last-child {
@@ -403,16 +415,16 @@
       bottom: 2rem;
       left: 50%;
       transform: translateX(-50%);
-      font-family: 'JetBrains Mono', monospace;
       font-size: 0.75rem;
-      color: var(--white-muted);
+      font-weight: 500;
+      color: var(--text-muted);
       letter-spacing: 0.1em;
       z-index: 100;
-      background: var(--navy-90);
+      background: var(--white);
       padding: 0.4rem 1rem;
       border-radius: 20px;
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--white-dim);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
     }
 
     /* ── Fade-in animation ── */
@@ -429,11 +441,31 @@
 
     /* ── Alternating section BG ── */
     section:nth-child(odd) {
-      background: var(--navy);
+      background: var(--white);
     }
 
     section:nth-child(even) {
-      background: linear-gradient(180deg, var(--surface), var(--navy));
+      background: var(--bg-alt);
+    }
+
+    /* ── Hero special — navy bg to match rawedge.au hero ── */
+    #hero {
+      background: var(--navy) !important;
+      color: var(--white);
+    }
+
+    #hero h1 {
+      color: var(--white);
+    }
+
+    #hero .lead {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
     }
 
     /* ── Responsive ── */
@@ -446,7 +478,7 @@
       }
       .vs-col:first-child {
         border-right: none;
-        border-bottom: 1px solid var(--white-dim);
+        border-bottom: 1px solid var(--border);
       }
       nav .nav-links {
         display: none;
@@ -486,7 +518,7 @@
       <span class="label">The Clinician ADHD Play</span>
       <h1>Practice admin is harder than clinical work when your brain works differently.</h1>
       <p class="lead">A consulting + software model for allied health practitioners with ADHD. Four sessions. A purpose-built desktop app. Systems that work with the brain, not against it.</p>
-      <p class="lead" style="color: var(--rust-bright); font-weight: 500;">Don't sell productivity. Sell systems that eliminate willpower.</p>
+      <p class="lead" style="color: #DC2626; font-weight: 500;">Don't sell productivity. Sell systems that eliminate willpower.</p>
     </div>
   </section>
 
@@ -862,8 +894,8 @@
       </div>
 
       <div style="text-align: center; margin-top: 4rem;">
-        <p style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--white);">Software, not willpower.</p>
-        <p style="color: var(--white-muted); margin-top: 0.5rem; font-size: 0.9rem;">RAW Edge Performance &mdash; Aaron Williams, AHPRA PSY0002297677</p>
+        <p style="font-size: 1.6rem; font-weight: 600; color: var(--navy);">Software, not willpower.</p>
+        <p style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.9rem;">RAW Edge Performance &mdash; Aaron Williams, AHPRA PSY0002297677</p>
       </div>
     </div>
   </section>
