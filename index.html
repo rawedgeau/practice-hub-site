@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Clinician ADHD Play — RAW Edge Performance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Urbanist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #041E49;
+      --navy-90: rgba(4, 30, 73, 0.9);
+      --navy-light: #0a2d5c;
+      --light-navy: #E8EEF4;
+      --light-navy-dim: rgba(232, 238, 244, 0.08);
+      --white: #FFFFFF;
+      --white-muted: rgba(255, 255, 255, 0.7);
+      --white-dim: rgba(255, 255, 255, 0.12);
+      --rust: #B91C1C;
+      --rust-bright: #DC2626;
+      --rust-dim: rgba(185, 28, 28, 0.15);
+      --green: #34d399;
+      --surface: #071e3d;
+      --surface-2: #0c2a52;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Urbanist', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(20px);
+      background: var(--navy-90);
+      border-bottom: 1px solid var(--white-dim);
+    }
+
+    nav .logo {
+      font-family: 'Urbanist', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+
+    nav .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    nav .nav-links a {
+      color: var(--white-muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      transition: color 0.3s;
+    }
+
+    nav .nav-links a:hover,
+    nav .nav-links a.active {
+      color: var(--white);
+    }
+
+    /* ── Sections ── */
+    section {
+      min-height: 100vh;
+      scroll-snap-align: start;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+    }
+
+    .container {
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* ── Typography ── */
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+    }
+
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+
+    h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      line-height: 1.3;
+      margin-bottom: 0.75rem;
+      font-weight: 400;
+    }
+
+    .lead {
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      color: var(--white-muted);
+      max-width: 700px;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--rust-bright);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--white-dim);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .card h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      color: var(--white-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .card-rust {
+      background: linear-gradient(135deg, var(--rust-dim), var(--surface));
+      border-color: rgba(185, 28, 28, 0.3);
+    }
+
+    .card-rust:hover {
+      border-color: rgba(185, 28, 28, 0.5);
+    }
+
+    /* ── Grids ── */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    /* ── Metric ── */
+    .metric {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.5rem;
+      color: var(--rust-bright);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .metric-green {
+      color: var(--green);
+    }
+
+    /* ── Phase callout ── */
+    .phase-callout {
+      background: var(--surface-2);
+      border-left: 4px solid var(--rust);
+      padding: 1.5rem 2rem;
+      border-radius: 0 8px 8px 0;
+      margin-top: 2rem;
+    }
+
+    .phase-callout p {
+      color: var(--white-muted);
+      font-size: 0.95rem;
+    }
+
+    .phase-callout strong {
+      color: var(--white);
+    }
+
+    /* ── Table ── */
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+    }
+
+    .pricing-table th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white-muted);
+      text-align: left;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--white-dim);
+    }
+
+    .pricing-table td {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--white-dim);
+      font-size: 0.95rem;
+    }
+
+    .pricing-table tr:hover td {
+      background: var(--surface);
+    }
+
+    .price-tag {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      color: var(--rust-bright);
+    }
+
+    /* ── Timeline ── */
+    .timeline {
+      position: relative;
+      padding-left: 3rem;
+      margin-top: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0.75rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--white-dim);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+      padding-left: 1rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.5rem;
+      top: 0.5rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--rust);
+      border: 2px solid var(--navy);
+    }
+
+    .timeline-item h3 {
+      font-family: 'Urbanist', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-item p {
+      color: var(--white-muted);
+      font-size: 0.9rem;
+    }
+
+    /* ── Steps list ── */
+    .steps {
+      counter-reset: step;
+      list-style: none;
+      margin-top: 2rem;
+    }
+
+    .steps li {
+      counter-increment: step;
+      position: relative;
+      padding: 1.25rem 1.5rem 1.25rem 4rem;
+      background: var(--surface);
+      border: 1px solid var(--white-dim);
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      color: var(--white-muted);
+    }
+
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 1.25rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      color: var(--rust-bright);
+    }
+
+    .steps li strong {
+      color: var(--white);
+    }
+
+    /* ── Versus table ── */
+    .vs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-top: 2rem;
+      border: 1px solid var(--white-dim);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .vs-col {
+      padding: 2rem;
+    }
+
+    .vs-col:first-child {
+      background: var(--surface);
+      border-right: 1px solid var(--white-dim);
+    }
+
+    .vs-col:last-child {
+      background: var(--surface-2);
+    }
+
+    .vs-col h3 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .vs-col:first-child h3 { color: var(--white-muted); }
+    .vs-col:last-child h3 { color: var(--rust-bright); }
+
+    .vs-col ul {
+      list-style: none;
+    }
+
+    .vs-col ul li {
+      padding: 0.6rem 0;
+      font-size: 0.9rem;
+      color: var(--white-muted);
+      border-bottom: 1px solid var(--white-dim);
+    }
+
+    .vs-col ul li:last-child {
+      border-bottom: none;
+    }
+
+    /* ── Slide counter ── */
+    #counter {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--white-muted);
+      letter-spacing: 0.1em;
+      z-index: 100;
+      background: var(--navy-90);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--white-dim);
+    }
+
+    /* ── Fade-in animation ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Alternating section BG ── */
+    section:nth-child(odd) {
+      background: var(--navy);
+    }
+
+    section:nth-child(even) {
+      background: linear-gradient(180deg, var(--surface), var(--navy));
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .grid-2, .grid-3, .grid-4 {
+        grid-template-columns: 1fr;
+      }
+      .vs-grid {
+        grid-template-columns: 1fr;
+      }
+      .vs-col:first-child {
+        border-right: none;
+        border-bottom: 1px solid var(--white-dim);
+      }
+      nav .nav-links {
+        display: none;
+      }
+      section {
+        padding: 5rem 1.5rem 3rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.6rem; }
+      .metric { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ── -->
+  <nav>
+    <div class="logo">RAW Edge Performance</div>
+    <ul class="nav-links">
+      <li><a href="#target">Target</a></li>
+      <li><a href="#pain">Pain</a></li>
+      <li><a href="#audit">Audit</a></li>
+      <li><a href="#app">App</a></li>
+      <li><a href="#setup">Setup</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#moat">Moat</a></li>
+      <li><a href="#next">Next</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── 1. Hero ── -->
+  <section id="hero">
+    <div class="container fade-in">
+      <span class="label">The Clinician ADHD Play</span>
+      <h1>Practice admin is harder than clinical work when your brain works differently.</h1>
+      <p class="lead">A consulting + software model for allied health practitioners with ADHD. Four sessions. A purpose-built desktop app. Systems that work with the brain, not against it.</p>
+      <p class="lead" style="color: var(--rust-bright); font-weight: 500;">Don't sell productivity. Sell systems that eliminate willpower.</p>
+    </div>
+  </section>
+
+  <!-- ── 2. Target ── -->
+  <section id="target">
+    <div class="container fade-in">
+      <span class="label">Who we serve</span>
+      <h2>Neurodivergent allied health practitioners in private practice.</h2>
+      <p class="lead">Solo and small practices (1-3 clinicians). AHPRA-registered. Clinically competent. Administratively drowning.</p>
+
+      <div class="grid-4">
+        <div class="card">
+          <div class="metric">84%</div>
+          <p>of Australian allied health professionals report burnout — admin burden is the primary driver.</p>
+        </div>
+        <div class="card">
+          <div class="metric">20%</div>
+          <p>of nurses suspect they have ADHD — only 4% are diagnosed. A 5x gap between suspicion and diagnosis.</p>
+        </div>
+        <div class="card">
+          <div class="metric">0</div>
+          <p>practice management platforms market neurodivergent-friendly features. Cliniko, Halaxy, Power Diary — none.</p>
+        </div>
+        <div class="card">
+          <div class="metric">0</div>
+          <p>AHPRA accommodations exist for neurodivergent practitioners. The compliance framework assumes neurotypical executive function.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 3. Pain ── -->
+  <section id="pain">
+    <div class="container fade-in">
+      <span class="label">The problem</span>
+      <h2>Four pain points that every ADHD clinician knows.</h2>
+      <p class="lead">These aren't productivity failures. They're executive function mismatches with systems designed for neurotypical brains.</p>
+
+      <div class="grid-2">
+        <div class="card card-rust">
+          <h3>Email Paralysis</h3>
+          <p>Inbox grows to 200+ unread. Important referrals get buried. Replying feels overwhelming, so nothing gets replied to. Revenue sits in unreturned phone calls.</p>
+        </div>
+        <div class="card card-rust">
+          <h3>Time Blindness</h3>
+          <p>Sessions run over. Notes don't get written until the weekend. Invoices go out weeks late. Every hour of free clinical work is an hour of unpaid admin debt.</p>
+        </div>
+        <div class="card card-rust">
+          <h3>Compliance Anxiety</h3>
+          <p>AHPRA CPD requirements. Insurance renewals. Supervision logs. Mandatory reporting. A fog of "I'm probably behind on something" that never lifts.</p>
+        </div>
+        <div class="card card-rust">
+          <h3>Decision Fatigue</h3>
+          <p>Every admin task requires a decision about <em>how</em> to do it, because no system exists. Filing a document means deciding where it goes. Every. Single. Time.</p>
+        </div>
+      </div>
+
+      <div class="phase-callout">
+        <p><strong>What they've already tried:</strong> Notion, Todoist, Trello (abandoned after setup). Time management coaching (helpful for mindset, nothing changes in the practice). Hiring a VA (works if systems exist, but without systems the VA can't help). Willpower and shame — the default strategy.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 4. Discovery / Audit ── -->
+  <section id="audit">
+    <div class="container fade-in">
+      <span class="label">Phase A — The Practice Audit</span>
+      <h2>Find the leaks. Build the system. Graduate in four sessions.</h2>
+      <p class="lead">A structured consulting engagement, not ongoing coaching. The app does the remembering. You do the configuring. Then you leave.</p>
+
+      <div class="grid-2">
+        <div>
+          <h3>Free: Clarity Call (30 min)</h3>
+          <p class="lead">Determine fit. Identify the top 3 pain points. Recommend the right package. Zero commitment.</p>
+
+          <h3 style="margin-top: 2rem;">The Entry Point</h3>
+          <p class="lead">The Clarity Call costs the practitioner nothing but 30 minutes. It gives them a concrete list of what's broken and what to fix first — regardless of whether they proceed. This is the "no-brainer" wedge.</p>
+        </div>
+        <div>
+          <div class="card">
+            <span class="label" style="margin-bottom: 0.5rem;">Pre-Session</span>
+            <h3>Practice Setup Assessment</h3>
+            <p>25-question scored assessment sent 48 hours before Session 1. Covers email management, scheduling, documentation, billing, compliance. Produces a domain-scored profile that identifies exactly where the admin system is failing.</p>
+          </div>
+          <div class="card" style="margin-top: 1rem;">
+            <span class="label" style="margin-bottom: 0.5rem;">Day 1 Deliverable</span>
+            <h3>Workflow Audit</h3>
+            <p>Map the entire practice flow: intake &rarr; session &rarr; notes &rarr; billing &rarr; follow-up. Identify time leaks, decision bottlenecks, and the 3 highest-ROI automation opportunities.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 5. Portal V1 / App ── -->
+  <section id="app">
+    <div class="container fade-in">
+      <span class="label">The Tool — Practice Hub</span>
+      <h2>A desktop app built for how ADHD brains actually work.</h2>
+      <p class="lead">Not another SaaS subscription. A local-first app installed on Day 1. Connects to Microsoft 365 or Google Workspace. Zero clinical data leaves the machine.</p>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>Email Triage Panel</h3>
+          <p>Keyboard-driven inbox processing (j/k/d/o/r/f). Batch mode. Reply templates. Process 200 emails in 15 minutes. No context switching.</p>
+        </div>
+        <div class="card">
+          <h3>Session Timer</h3>
+          <p>Colour-phased countdown. Green &rarr; amber &rarr; red. Visible from across the room. No more sessions running 20 minutes over.</p>
+        </div>
+        <div class="card">
+          <h3>Schedule Viewer</h3>
+          <p>Today's calendar at a glance. Client context displayed before they walk in. Buffer blocks visible. No surprises.</p>
+        </div>
+        <div class="card">
+          <h3>Post-Session Checklist</h3>
+          <p>Auto-prompts after every session: notes written? Invoice sent? Follow-up booked? Risk flagged? Mandatory reporting considered? Nothing falls through.</p>
+        </div>
+        <div class="card">
+          <h3>Client Cards</h3>
+          <p>Per-client profiles with session history, tasks, notes, tags. One click to see everything about a client. No searching through files.</p>
+        </div>
+        <div class="card">
+          <h3>Daily Progress</h3>
+          <p>Session streak counter. Admin completion score. Visual ring that fills as you clear tasks. Dopamine feedback loops designed for the ADHD brain.</p>
+        </div>
+      </div>
+
+      <div class="phase-callout">
+        <p><strong>Local-first. No cloud. No subscriptions.</strong> All data stored in encrypted SQLite on the practitioner's machine. AHPRA-compliant by design — clinical data never leaves the device. The practitioner owns their data, their app, their system.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 6. Full Setup / Portal V2 ── -->
+  <section id="setup">
+    <div class="container fade-in">
+      <span class="label">Phase B — The Full Setup</span>
+      <h2>Four sessions. App configured. Systems installed. Then you graduate.</h2>
+      <p class="lead">This is consulting, not coaching. The app holds the system. The practitioner maintains it in 15 minutes per week. No ongoing dependency.</p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <h3>Session 1: Discovery &amp; Audit</h3>
+          <p>Install Practice Hub. Connect email + calendar. Complete workflow audit. Identify top 3 quick wins.</p>
+        </div>
+        <div class="timeline-item">
+          <h3>Session 2: Email &amp; Communication</h3>
+          <p>Configure triage panel. Install reply templates. Set batch schedule. Turn off push notifications. Process 10 real emails live.</p>
+        </div>
+        <div class="timeline-item">
+          <h3>Session 3: Scheduling &amp; Sessions</h3>
+          <p>Configure session timer and colour phases. Set up post-session checklist. Build per-client notes. Calendar display tuning.</p>
+        </div>
+        <div class="timeline-item">
+          <h3>Session 4: Integration &amp; Graduation</h3>
+          <p>Connect practice management system. Set compliance reminders (AHPRA, CPD, insurance). Walk through weekly maintenance routine. Graduate.</p>
+        </div>
+      </div>
+
+      <div class="vs-grid" style="margin-top: 3rem;">
+        <div class="vs-col">
+          <h3>What they tried before</h3>
+          <ul>
+            <li>Weekly motivation sessions</li>
+            <li>"Try to remember to..."</li>
+            <li>Behaviour change focus</li>
+            <li>Ongoing coaching dependency</li>
+            <li>Generic productivity advice</li>
+          </ul>
+        </div>
+        <div class="vs-col">
+          <h3>What we do instead</h3>
+          <ul>
+            <li>Install the app, configure it once</li>
+            <li>App automates triage, timers, checklists</li>
+            <li>Environment design via software</li>
+            <li>Graduation after 4 sessions</li>
+            <li>ADHD-specific tool built for allied health</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 7. Solutions / What Changes ── -->
+  <section id="solutions">
+    <div class="container fade-in">
+      <span class="label">What changes</span>
+      <h2>Measurable outcomes, not motivational quotes.</h2>
+      <p class="lead">By graduation, these are the benchmarks. Not aspirations — system outputs.</p>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="metric metric-green">&lt; 15 min</div>
+          <h3>Inbox processing</h3>
+          <p>Full inbox triage using keyboard shortcuts and batch mode. Down from "I'll get to it this weekend."</p>
+        </div>
+        <div class="card">
+          <div class="metric metric-green">48 hrs</div>
+          <h3>Max email age</h3>
+          <p>Zero emails older than 48 hours requiring a response. Referrals returned same-day.</p>
+        </div>
+        <div class="card">
+          <div class="metric metric-green">15 min</div>
+          <h3>Post-session notes</h3>
+          <p>Notes completed within 15 minutes of session end, prompted by the post-session checklist. Down from "next weekend."</p>
+        </div>
+        <div class="card">
+          <div class="metric metric-green">3 hrs/wk</div>
+          <h3>Total admin time</h3>
+          <p>Down from 8-12 hours per week. The system eliminates decision overhead and context-switching costs.</p>
+        </div>
+        <div class="card">
+          <div class="metric metric-green">100%</div>
+          <h3>Compliance tracked</h3>
+          <p>AHPRA renewal, insurance, CPD, supervision — all with advance calendar reminders. No more 11pm panic.</p>
+        </div>
+        <div class="card">
+          <div class="metric metric-green">15 min/wk</div>
+          <h3>Maintenance</h3>
+          <p>Weekly maintenance routine. Not a lifestyle change. A 15-minute check-in with the app.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 8. Pricing ── -->
+  <section id="pricing">
+    <div class="container fade-in">
+      <span class="label">Pricing</span>
+      <h2>Three tiers. Transparent. GST inclusive.</h2>
+      <p class="lead">Priced at the cost of 2-4 client sessions. The ROI is measured in hours reclaimed per week, every week, permanently.</p>
+
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th>Package</th>
+            <th>Sessions</th>
+            <th>Price</th>
+            <th>Includes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Clarity Call</strong></td>
+            <td>1 &times; 30 min</td>
+            <td><span class="price-tag">Free</span></td>
+            <td>Determine fit, identify top 3 pain points, package recommendation</td>
+          </tr>
+          <tr>
+            <td><strong>Quick Start</strong></td>
+            <td>2 &times; 50 min</td>
+            <td><span class="price-tag">$500</span></td>
+            <td>Email triage + session management setup. App + templates included.</td>
+          </tr>
+          <tr>
+            <td><strong>Full Setup</strong></td>
+            <td>4 &times; 50 min</td>
+            <td><span class="price-tag">$990</span></td>
+            <td>Complete audit &rarr; automation. Assessment, all templates, 30-day follow-up, app included.</td>
+          </tr>
+          <tr>
+            <td><strong>Group Cohort</strong></td>
+            <td>6 &times; 90 min</td>
+            <td><span class="price-tag">$800/person</span></td>
+            <td>6 practitioners max. Peer accountability + extended curriculum. Group chat included.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="phase-callout" style="margin-top: 2rem;">
+        <p><strong>Future add-on: Monthly Retainer ($300-500/month)</strong> — Monthly 30-minute check-in, workflow optimisation, new feature rollout, compliance monitoring. Not launched yet — validate the 4-session model first, then layer the recurring revenue.</p>
+      </div>
+
+      <div class="grid-2" style="margin-top: 2rem;">
+        <div class="card">
+          <h3>Unit Economics</h3>
+          <p>Full Setup: $990 for ~3.5 hours of delivery + prep. Effective rate: ~$280/hr. Group Cohort: $4,800 revenue for 9 hours of delivery. Effective rate: ~$533/hr. Both exceed standard psychology session rates ($200-260/hr).</p>
+        </div>
+        <div class="card">
+          <h3>Scaling Path</h3>
+          <p>10 Full Setup clients/month = $9,900/month. 2 Group Cohorts/quarter = $9,600/quarter. Layer monthly retainers as clients graduate. Target: $15K-20K/month within 12 months.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 9. Moat ── -->
+  <section id="moat">
+    <div class="container fade-in">
+      <span class="label">The Moat</span>
+      <h2>Once they're in, they don't leave.</h2>
+      <p class="lead">This isn't a subscription they can cancel. It's infrastructure they've built their practice on.</p>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Clinical Data Gravity</h3>
+          <p>Session logs, client cards, notes, task history — all in the local SQLite database. Migrating mid-treatment is unthinkable. The data compounds monthly.</p>
+        </div>
+        <div class="card">
+          <h3>AHPRA Retention Mandate</h3>
+          <p>Adult records: 7 years. Children: until they turn 25. The compliance framework forces data persistence. The app becomes the archive.</p>
+        </div>
+        <div class="card">
+          <h3>ADHD Workflow Lock-In</h3>
+          <p>Once an ADHD brain finds a system that works, changing it has disproportionate cost. The keyboard shortcuts, the colour cues, the routine — they become muscle memory. Switching tools means rebuilding from scratch.</p>
+        </div>
+        <div class="card">
+          <h3>Consulting Relationship</h3>
+          <p>You're not a vendor. You're the person who fixed their practice. When they need the retainer, the VA onboarding, the bookkeeper referral — you're the first call.</p>
+        </div>
+      </div>
+
+      <div class="phase-callout">
+        <p><strong>The cross-sell flywheel:</strong> Clinician discovers Practice Hub &rarr; Full Setup consulting &rarr; Monthly retainer &rarr; Refers athlete clients to MPM courses &rarr; Refers parents to Rising workshops &rarr; Uses Senaptec for sports psych clients. The consulting relationship becomes the top-of-funnel for the entire RAW Edge ecosystem.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 10. Competitive Position ── -->
+  <section id="position">
+    <div class="container fade-in">
+      <span class="label">Why this wins</span>
+      <h2>Nobody else is doing this. Literally.</h2>
+      <p class="lead">The competitive landscape is empty. No practice management platform markets to neurodivergent clinicians. No AI scribe addresses the full admin stack. No consultant combines ADHD lived experience with AHPRA credentials and purpose-built software.</p>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Cliniko / Halaxy / Power Diary</h3>
+          <p>Practice management platforms. Good at what they do. Zero ADHD-specific features. No workflow consulting. No environmental design. They assume you can maintain habits through willpower.</p>
+        </div>
+        <div class="card">
+          <h3>Heidi / Tortus (AI Scribes)</h3>
+          <p>Solve documentation. Don't solve email paralysis, time blindness, compliance tracking, or decision fatigue. They're one tool in a broken system.</p>
+        </div>
+        <div class="card">
+          <h3>ADHD Coaches</h3>
+          <p>Ongoing sessions, mindset focus, general productivity. No software delivery. No graduation model. No allied health context. No AHPRA compliance expertise.</p>
+        </div>
+        <div class="card card-rust">
+          <h3>Practice Hub + Consulting</h3>
+          <p><strong>AHPRA psychologist</strong> with lived ADHD experience delivers a <strong>purpose-built app</strong> through <strong>structured consulting</strong> with a <strong>graduation model</strong>. Local-first. Evidence-backed. Australia-wide. Nobody else has all four.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 11. Next Steps ── -->
+  <section id="next">
+    <div class="container fade-in">
+      <span class="label">Launch Sequence</span>
+      <h2>Five moves to go live.</h2>
+      <p class="lead">The app is built. The methodology is documented. The pricing is set. What's left is packaging and outreach.</p>
+
+      <ol class="steps">
+        <li><strong>Build the service page</strong> — rawedge.au/services/practice-setup. Copy exists in SERVICE_PAGE_COPY.md. Deploy via Elementor.</li>
+        <li><strong>Identify 5 target practitioners</strong> — Perth psychologists with known ADHD. Professional network, LinkedIn, AHPRA register. Personal outreach, not cold email.</li>
+        <li><strong>Run 5 free Clarity Calls</strong> — Validate the pain points. Refine the pitch. Convert 2-3 into Full Setup clients.</li>
+        <li><strong>Deliver 3 Full Setups</strong> — Collect pre/post assessment data. Document case studies (with consent). Prove the outcomes.</li>
+        <li><strong>Layer the retainer</strong> — After 3 graduated clients, offer the $300-500/month retainer. This is the recurring revenue tail.</li>
+      </ol>
+
+      <div class="grid-2" style="margin-top: 3rem;">
+        <div class="card card-rust">
+          <h3>Target Market Size</h3>
+          <p>30,000-60,000 neurodivergent allied health practitioners in Australia (extrapolated from 20% suspected ADHD rate across ~150,000 registered practitioners). Even 0.1% penetration = 30-60 clients.</p>
+        </div>
+        <div class="card card-rust">
+          <h3>Revenue Target: Year 1</h3>
+          <p>40 Full Setup clients ($39,600) + 4 Group Cohorts ($19,200) + 15 monthly retainers by Q4 ($27,000 annualised). Total: ~$85,000 in Year 1 from this service line alone.</p>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 4rem;">
+        <p style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--white);">Software, not willpower.</p>
+        <p style="color: var(--white-muted); margin-top: 0.5rem; font-size: 0.9rem;">RAW Edge Performance &mdash; Aaron Williams, AHPRA PSY0002297677</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Slide Counter ── -->
+  <div id="counter">1 / 11</div>
+
+  <script>
+    // ── Section tracking ──
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('nav .nav-links a');
+    const counter = document.getElementById('counter');
+    let currentSlide = 0;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const idx = Array.from(sections).indexOf(entry.target);
+          currentSlide = idx;
+          counter.textContent = `${idx + 1} / ${sections.length}`;
+
+          // Update nav active state
+          navLinks.forEach(link => link.classList.remove('active'));
+          const activeLink = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+          if (activeLink) activeLink.classList.add('active');
+        }
+      });
+    }, {
+      threshold: 0.5
+    });
+
+    sections.forEach(s => observer.observe(s));
+
+    // ── Keyboard navigation ──
+    let scrolling = false;
+    document.addEventListener('keydown', (e) => {
+      if (scrolling) return;
+      let target = null;
+
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        target = Math.min(currentSlide + 1, sections.length - 1);
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        target = Math.max(currentSlide - 1, 0);
+      }
+
+      if (target !== null && target !== currentSlide) {
+        scrolling = true;
+        sections[target].scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => { scrolling = false; }, 800);
+      }
+    });
+
+    // ── Fade-in on scroll ──
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+  </script>
+
+</body>
+</html>
