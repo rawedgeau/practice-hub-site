@@ -61,11 +61,20 @@
     }
 
     nav .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       font-weight: 700;
       font-size: 0.9rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--navy);
+      text-decoration: none;
+    }
+
+    nav .logo img {
+      height: 32px;
+      width: auto;
     }
 
     nav .nav-links {
@@ -499,7 +508,7 @@
 
   <!-- ── Nav ── -->
   <nav>
-    <div class="logo">RAW Edge Performance</div>
+    <div class="logo"><img src="logo.png" alt="RAW Edge Performance logo">RAW Edge Performance</div>
     <ul class="nav-links">
       <li><a href="#target">Target</a></li>
       <li><a href="#pain">Pain</a></li>
